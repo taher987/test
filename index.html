@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Random Word Generator</title>
+</head>
+<body>
+    <h1>Random Word Generator</h1>
+    <p id="randomWord"></p>
+    <button id="generateButton" onclick="generateRandomWord()">Generate Word</button>
+    <script>
+        async function generateRandomWord() {
+            const response = await fetch('/generate');
+            const data = await response.json();
+            const randomWordElement = document.getElementById("randomWord");
+
+            if (data.word) {
+                randomWordElement.textContent = data.word;
+            } else {
+                randomWordElement.textContent = "Button has already been clicked.";
+                document.getElementById("generateButton").disabled = true;
+            }
+        }
+    </script>
+</body>
+</html>
